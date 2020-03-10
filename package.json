@@ -1,0 +1,43 @@
+{
+  "name": "game-of-life",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "description": "The Game of Life",
+  "main": "index.html",
+  "bin": {
+    "game-of-life": "./bin/app.js"
+  },
+  "scripts": {
+    "start-server": "node server",
+    "start": "webpack-dev-server --hot --inline --progress",
+    "build": "webpack -p",
+    "prod": "node prod-server.js"
+  },
+  "author": "Marco Friso",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.8.6",
+    "@babel/preset-env": "^7.8.6",
+    "@babel/preset-react": "^7.8.3",
+    "babel-loader": "^8.0.6",
+    "commander": "^4.1.1",
+    "inquirer": "^7.0.6",
+    "webpack": "^4.41.6",
+    "webpack-dev-server": "^3.10.3",
+    "xml2js": "^0.4.23",
+    "xmldom": "^0.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^1.19.1",
+    "webpack-cli": "^3.3.11"
+  }
+}
