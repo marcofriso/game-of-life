@@ -7,7 +7,7 @@ const setup = (n, t) => {
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < n; j++) {
       for (let k = 0; k < t; k++) {
-        let value = Math.random() >= 0.6;
+        const value = Math.floor(Math.random() * 2);
 
         grid[i][j][k] = value;
       }
