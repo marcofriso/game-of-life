@@ -7,7 +7,7 @@ const setup = (n, t) => {
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < n; j++) {
       for (let k = 0; k < t; k++) {
-        const value = Math.floor(Math.random() * 2);
+        const value = Math.random() > 1 / (t * 2) ? 0 : 1;
 
         grid[i][j][k] = value;
       }
@@ -68,5 +68,7 @@ const xmlDoc = (n, t, i) => {
 
   return xmlDoc;
 };
+
+// xmlDoc(5, 3, 5);
 
 module.exports = xmlDoc;

@@ -14,8 +14,6 @@ const gameOfLife = path => {
 
       parser.parseString(data, (err, result) => {
         if (err) throw err;
-
-        console.log('DATA', result);
         console.log('The XML file has been imported');
 
         initializeGame(result);
@@ -25,7 +23,7 @@ const gameOfLife = path => {
 
   parseXML(path);
 
-  const deduplicate = (grid, n) => {
+  const deduplicate = (grid, n, t) => {
     for (let i = 0; i < n; i++) {
       for (let j = 0; j < n; j++) {
         if (grid[i][j].indexOf(1) !== grid[i][j].lastIndexOf(1)) {
@@ -41,7 +39,7 @@ const gameOfLife = path => {
 
           const selectSpecies = Math.floor(Math.random() * counter);
 
-          for (let k = 0; k < indexTrue.length; k++) {
+          for (let k = 0; k < t; k++) {
             k === selectSpecies ? (grid[i][j][k] = 1) : (grid[i][j][k] = 0);
           }
         }
@@ -61,7 +59,7 @@ const gameOfLife = path => {
     });
 
     if (t > 1) {
-      deduplicate(grid, n);
+      deduplicate(grid, n, t);
     }
 
     computeNextIterations(grid, n, t, i);
@@ -71,15 +69,13 @@ const gameOfLife = path => {
     let sum = 0;
     for (let i = -1; i < 2; i++) {
       for (let j = -1; j < 2; j++) {
-        for (let k = 0; k < t + 1; k++) {
-          let col = (x + i + n) % n;
-          let row = (y + j + n) % n;
-
-          sum += grid[col][row][k];
-        }
+        let col = (x + i + n) % n;
+        let row = (y + j + n) % n;
+        sum += grid[col][row].indexOf(1) !== -1 && 1;
       }
     }
     sum -= grid[x][y][t];
+
     return sum;
   };
 
@@ -107,7 +103,7 @@ const gameOfLife = path => {
     grid = next;
 
     if (t > 1) {
-      deduplicate(grid, n);
+      deduplicate(grid, n, t);
     }
 
     return grid;
@@ -116,9 +112,9 @@ const gameOfLife = path => {
   const computeNextIterations = (grid, n, t, i) => {
     for (let l = 0; l < i; l++) {
       grid = computeNextIteration(grid, n, t);
-
-      console.log('FINAL-GRID', grid);
     }
+
+    // console.log('FINAL-GRID', grid);
   };
 };
 

@@ -15,6 +15,7 @@ bundle.js
 .env.development.local
 .env.test.local
 .env.production.local
+game-of-life-setup.xml
 
 npm-debug.log*
 yarn-debug.log*
