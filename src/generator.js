@@ -1,6 +1,4 @@
-const fs = require('fs');
-const DOMParser = require('xmldom').DOMParser;
-const make3DArray = require('./common');
+const { make3DArray, gridToXml } = require('./common');
 
 const setup = (n, t) => {
   let grid = make3DArray(n);
@@ -17,58 +15,12 @@ const setup = (n, t) => {
   return grid;
 };
 
-const organism = (x, y, t) =>
-  `
-    <organism>
-      <x_pos>${x}</x_pos>
-      <y_pos>${y}</y_pos>
-      <species>${t}</species>
-    </organism>`;
+const setupFile = (n, t, i, initPath) => {
+  const setupGrid = setup(n, t);
 
-const organisms = grid => {
-  const organismsAlive = [];
-
-  grid.map((x, i) => {
-    x.map((y, j) => {
-      y.map((t, k) => {
-        t && organismsAlive.push(organism(i, j, k));
-      });
-    });
-  });
-
-  return organismsAlive.join('');
+  return gridToXml(setupGrid, n, t, i, initPath);
 };
 
-const xmlBodyStr = (n, t, i) => {
-  let grid = setup(n, t);
-  return `<?xml version="1.0" encoding="UTF­8"?>
-<life>
-  <world>
-    <cells>${n}</cells>
-    <species>${t}</species>
-    <iterations>${i}</iterations>
-  </world>
-  <organisms>${organisms(grid)}
-  </organisms>
-</life>
-`;
-};
+setupFile(30, 5, 105, 'game-of-life-setup.xml');
 
-const xmlDoc = (n, t, i) => {
-  const xmlBody = xmlBodyStr(n, t, i);
-  const parser = new DOMParser();
-  const xmlDoc = parser.parseFromString(xmlBody, 'text/xml');
-  fs.writeFile('game-of-life-setup.xml', xmlDoc, function(err) {
-    if (err) {
-      throw err;
-    } else {
-      console.log('setup file `game-of-life-setup.xml` has ben created');
-    }
-  });
-
-  return xmlDoc;
-};
-
-// xmlDoc(5, 3, 5);
-
-module.exports = xmlDoc;
+// module.exports = setupFile;
