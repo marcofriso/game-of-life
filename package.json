@@ -10,16 +10,12 @@
   "bin": {
     "game-of-life": "./bin/app.js"
   },
-  "scripts": {
-    "start-server": "node server",
-    "start": "webpack-dev-server --hot --inline --progress",
-    "build": "webpack -p",
-    "prod": "node prod-server.js"
-  },
   "author": "Marco Friso",
   "license": "ISC",
   "dependencies": {
+    "colors": "^1.4.0",
     "commander": "^4.1.1",
+    "figlet": "^1.3.0",
     "inquirer": "^7.0.6",
     "xml2js": "^0.4.23",
     "xmldom": "^0.3.0"

@@ -1,5 +1,6 @@
 const fs = require('fs');
 const xml2js = require('xml2js');
+const colors = require('colors');
 const { make3DArray, gridToXml } = require('./common');
 
 // const n = 20; // Dimension of the square "world" MAX 30
@@ -14,7 +15,7 @@ const gameOfLife = (initPath, finalPath) => {
 
       parser.parseString(data, (err, result) => {
         if (err) throw err;
-        console.log('The XML file has been imported');
+        console.log(colors.green('\nThe XML file has been imported'));
 
         initializeGame(result);
       });
@@ -115,8 +116,9 @@ const gameOfLife = (initPath, finalPath) => {
     }
 
     gridToXml(grid, n, t, i, finalPath);
-    // console.log('FINAL-GRID', grid);
   };
 };
 
-gameOfLife('../src/game-of-life-setup.xml', '../src/game-of-life-final.xml');
+// gameOfLife('../output/game-of-life-setup.xml', '../output/game-of-life-final.xml');
+
+module.exports = gameOfLife;

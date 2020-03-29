@@ -1,5 +1,6 @@
 const fs = require('fs');
 const DOMParser = require('xmldom').DOMParser;
+const colors = require('colors');
 
 const make3DArray = (n, t) => {
   let arr = new Array(n);
@@ -59,7 +60,7 @@ const gridToXml = (grid, n, t, i, path) => {
       if (err) {
         throw err;
       } else {
-        console.log(`setup file "${path}" has ben created`);
+        console.log(colors.green.bold(`\nFile "${path}" has ben created`));
       }
     });
 
