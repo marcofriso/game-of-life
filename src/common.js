@@ -60,7 +60,7 @@ const gridToXml = (grid, n, t, i, path) => {
       if (err) {
         throw err;
       } else {
-        console.log(colors.green.bold(`\nFile "${path}" has ben created`));
+        console.log(colors.green.bold(`\nFile "${path}" has ben created\n`));
       }
     });
 

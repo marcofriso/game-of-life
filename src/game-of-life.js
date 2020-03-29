@@ -15,7 +15,7 @@ const gameOfLife = (initPath, finalPath) => {
 
       parser.parseString(data, (err, result) => {
         if (err) throw err;
-        console.log(colors.green('\nThe XML file has been imported'));
+        console.log(colors.green('The XML file has been imported'));
 
         initializeGame(result);
       });

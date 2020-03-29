@@ -75,7 +75,7 @@ const game = () => {
         '\nYou are going to execute the Game of Live with the following parameter:'
       )
     );
-    console.log('Initial file: ', answers.initialFile);
+    console.log('Initial file: ', colors.yellow(answers.initialFile));
 
     gameOfLife(answers.initialFile, '../output/game-of-life-final.xml');
   });
