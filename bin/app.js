@@ -44,7 +44,7 @@ const questionsGame = [
     type: 'string',
     name: 'initialFile',
     message: 'Chooose the initial file',
-    default: '../output/game-of-life-setup.xml',
+    default: '../game-of-life-setup.xml',
   },
 ];
 
@@ -63,7 +63,7 @@ const generate = () => {
       Number(answers.squareDimension),
       Number(answers.species),
       answers.iterations,
-      '../output/game-of-life-setup.xml'
+      '../game-of-life-setup.xml'
     );
   });
 };
@@ -77,7 +77,7 @@ const game = () => {
     );
     console.log('Initial file: ', colors.yellow(answers.initialFile));
 
-    gameOfLife(answers.initialFile, '../output/game-of-life-final.xml');
+    gameOfLife(answers.initialFile, '../game-of-life-final.xml');
   });
 };
 

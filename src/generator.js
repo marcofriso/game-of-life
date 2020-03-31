@@ -21,6 +21,4 @@ const setupFile = (n, t, i, initPath) => {
   return gridToXml(setupGrid, n, t, i, initPath);
 };
 
-// setupFile(30, 5, 105, 'game-of-life-setup.xml');
-
 module.exports = setupFile;

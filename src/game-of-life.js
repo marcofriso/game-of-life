@@ -3,10 +3,6 @@ const xml2js = require('xml2js');
 const colors = require('colors');
 const { make3DArray, gridToXml } = require('./common');
 
-// const n = 20; // Dimension of the square "world" MAX 30
-// const t = 3; // Number of distinct species MAX 3
-// const i = 500; // Number of iterations to be calculated </world> MAX 1000
-
 const gameOfLife = (initPath, finalPath) => {
   const parseXML = path => {
     const parser = new xml2js.Parser();
@@ -118,7 +114,5 @@ const gameOfLife = (initPath, finalPath) => {
     gridToXml(grid, n, t, i, finalPath);
   };
 };
-
-// gameOfLife('../output/game-of-life-setup.xml', '../output/game-of-life-final.xml');
 
 module.exports = gameOfLife;
