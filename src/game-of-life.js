@@ -101,8 +101,10 @@ const gameOfLife = (initPath, finalPath) => {
         if (grid[i][j].indexOf(1) === -1 && numberOfNeighbors === 3) {
           let selectSpecies = [];
 
-          if (neighbors.indexOf(2) !== -1 || neighbors.indexOf(3) !== -1) {
+          if (neighbors.indexOf(2) !== -1) {
             selectSpecies = neighbors.indexOf(2);
+          } else if (neighbors.indexOf(3) !== -1) {
+            selectSpecies = neighbors.indexOf(3);
           } else {
             let counter = 0;
             let indexTrue = [];
