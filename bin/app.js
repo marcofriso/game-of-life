@@ -14,7 +14,7 @@ const questionsGenerator = [
     type: 'list',
     name: 'squareDimension',
     message: 'Choose the square width',
-    choices: [10, 20, 30, 40, 50],
+    choices: [5, 10, 20, 30, 40, 50],
     default: [20],
   },
   {

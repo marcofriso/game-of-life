@@ -3,6 +3,11 @@ const xml2js = require('xml2js');
 const colors = require('colors');
 const { make3DArray, gridToXml } = require('./common');
 
+// Properties:
+// n → Dimension of the square "world"
+// t → Number of distinct species
+// i → Number of iterations to be calculated
+
 const gameOfLife = (initPath, finalPath) => {
   const parseXML = path => {
     const parser = new xml2js.Parser();
@@ -62,18 +67,27 @@ const gameOfLife = (initPath, finalPath) => {
     computeNextIterations(grid, n, t, i);
   };
 
-  const countNeighbors = (grid, x, y, t, n) => {
-    let sum = 0;
+  const countNeighbors = (grid, x, y, n) => {
+    let count = [];
+
+    grid[x][y].forEach((s, k) => (count[k] = 0));
+
     for (let i = -1; i < 2; i++) {
       for (let j = -1; j < 2; j++) {
         let col = (x + i + n) % n;
         let row = (y + j + n) % n;
-        sum += grid[col][row].indexOf(1) !== -1 && 1;
+
+        grid[col][row].forEach((species, k) => {
+          count[k] += species === 1 && 1;
+        });
       }
     }
-    sum -= grid[x][y][t];
 
-    return sum;
+    grid[x][y].forEach((species, k) => {
+      count[k] -= species === 1 && 1;
+    });
+
+    return count;
   };
 
   const computeNextIteration = (grid, n, t) => {
@@ -81,18 +95,38 @@ const gameOfLife = (initPath, finalPath) => {
 
     for (let i = 0; i < n; i++) {
       for (let j = 0; j < n; j++) {
-        for (let k = 0; k < t; k++) {
-          const state = grid[i][j][k];
+        const neighbors = countNeighbors(grid, i, j, n);
+        const numberOfNeighbors = neighbors.reduce((sum, val) => sum + val, 0);
 
-          const neighbors = countNeighbors(grid, i, j, k, n);
+        if (grid[i][j].indexOf(1) === -1 && numberOfNeighbors === 3) {
+          let selectSpecies = [];
 
-          if (state == 0 && neighbors == 3) {
-            next[i][j][k] = 1;
-          } else if (state == 1 && (neighbors < 2 || neighbors > 3)) {
-            next[i][j][k] = 0;
+          if (neighbors.indexOf(2) !== -1 || neighbors.indexOf(3) !== -1) {
+            selectSpecies = neighbors.indexOf(2);
           } else {
-            next[i][j][k] = state;
+            let counter = 0;
+            let indexTrue = [];
+
+            neighbors.forEach((species, k) => {
+              if (species === 1) {
+                indexTrue.push(k);
+                counter++;
+              }
+            });
+
+            selectSpecies = Math.floor(Math.random() * counter);
           }
+
+          for (let k = 0; k < t; k++) {
+            k === selectSpecies ? (next[i][j][k] = 1) : (next[i][j][k] = 0);
+          }
+        } else if (
+          grid[i][j].indexOf(1) !== -1 &&
+          (numberOfNeighbors < 2 || numberOfNeighbors > 3)
+        ) {
+          grid[i][j].forEach((species, k) => (next[i][j][k] = 0));
+        } else {
+          next[i][j] = grid[i][j];
         }
       }
     }

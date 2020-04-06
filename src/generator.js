@@ -1,5 +1,10 @@
 const { make3DArray, gridToXml } = require('./common');
 
+// Properties:
+// n → Dimension of the square "world"
+// t → Number of distinct species
+// i → Number of iterations to be calculated
+
 const setup = (n, t) => {
   let grid = make3DArray(n);
   for (let i = 0; i < n; i++) {
